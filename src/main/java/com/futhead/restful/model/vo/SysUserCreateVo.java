@@ -1,36 +1,19 @@
-package com.futhead.restful.model.po;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.util.List;
+package com.futhead.restful.model.vo;
 
 /**
- * Created by Administrator on 2017/7/30.
+ * Created by Administrator on 2017/8/8.
  */
-@Entity
-public class SysUser {
+public class SysUserCreateVo {
 
-    @Id
-    @GeneratedValue
     private int id;
 
-    @Column(nullable = false)
     private String username;
 
-    @JsonIgnore
-    @Column(nullable = false)
     private String password;
 
-    @Column
     private String pickname;
 
-    @Column
     private int age;
-
-    @JsonIgnore
-    @Transient
-    private List<SysRole> roles;
 
     public int getId() {
         return id;
@@ -72,19 +55,13 @@ public class SysUser {
         this.age = age;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
-        return "SysUser{" +
+        return "SysUserCreateVo{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", pickname='" + pickname + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

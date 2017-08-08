@@ -1,12 +1,15 @@
 package com.futhead.restful.api;
 
 import com.futhead.restful.exception.MyException;
+import com.futhead.restful.model.po.SysUser;
 import com.futhead.restful.model.vo.User;
+import com.futhead.restful.service.SysUserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -22,6 +25,9 @@ public class UserController {
 
     private static final String SUCCESS = "success";
 
+    @Autowired
+    private SysUserService sysUserService;
+
     private static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
     @GetMapping("/json")
@@ -36,17 +42,17 @@ public class UserController {
 
     @ApiOperation(value = "获取用户列表")
     @GetMapping("/")
-    public List<User> getUsers() {
-        return new ArrayList<>(users.values());
+    public List<SysUser> getUsers() {
+        return sysUserService.getSysUsers();
     }
 
 
     @ApiOperation(value = "创建用户", notes = "根据User对象创建用户")
-    @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "User")
+    @ApiImplicitParam(name = "sysUser", value = "系统用户实体sysUser", required = true, dataType = "SysUser")
     @PostMapping("/")
-    public String save(@RequestBody User user) {
-        users.put(user.getId(), user);
-        return SUCCESS;
+    public SysUser save(@RequestBody SysUser sysUser) {
+//        users.put(user.getId(), user);
+        return sysUserService.saveOrUpdate(sysUser);
     }
 
 
