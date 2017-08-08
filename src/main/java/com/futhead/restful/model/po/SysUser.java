@@ -28,10 +28,6 @@ public class SysUser {
     @Column
     private int age;
 
-    @JsonIgnore
-    @Transient
-    private List<SysRole> roles;
-
     public int getId() {
         return id;
     }
@@ -70,14 +66,6 @@ public class SysUser {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
     }
 
     @Override

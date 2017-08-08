@@ -2,11 +2,13 @@ package com.futhead.restful.api;
 
 import com.futhead.restful.exception.MyException;
 import com.futhead.restful.model.po.SysUser;
+import com.futhead.restful.model.vo.SysUserCreateVo;
 import com.futhead.restful.model.vo.User;
 import com.futhead.restful.service.SysUserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,35 +49,39 @@ public class UserController {
     }
 
 
-    @ApiOperation(value = "创建用户", notes = "根据User对象创建用户")
-    @ApiImplicitParam(name = "sysUser", value = "系统用户实体sysUser", required = true, dataType = "SysUser")
+    @ApiOperation(value = "创建用户", notes = "根据SysUserCreateVo对象创建用户")
     @PostMapping("/")
-    public SysUser save(@RequestBody SysUser sysUser) {
-//        users.put(user.getId(), user);
+    public SysUser save(@RequestBody SysUserCreateVo sysUserCreateVo) {
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(sysUserCreateVo.getUsername());
+        sysUser.setPassword(sysUserCreateVo.getPassword());
+        sysUser.setPickname(sysUserCreateVo.getPickname());
+        sysUser.setAge(sysUserCreateVo.getAge());
         return sysUserService.saveOrUpdate(sysUser);
     }
 
 
     @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Int", paramType = "path")
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        return users.get(id);
+    public SysUser getUser(@PathVariable int id) {
+        return sysUserService.findSysUserById(id);
     }
 
 
     @ApiOperation(value = "更新用户的详细信息", notes = "根据url的id来指定更新对象，并根据传过来的用户信息来更新用户详细信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path"),
-            @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "User", paramType = "body")
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Int", paramType = "path")
+//            @ApiImplicitParam(name = "sysUser", value = "用户实体sysUser", required = true, dataType = "SysUser", paramType = "body")
     })
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String putUser(@PathVariable Long id, @RequestBody User user) {
-        User u = users.get(id);
-        u.setName(user.getName());
-        u.setAge(user.getAge());
-        users.put(id, u);
-        return SUCCESS;
+    public SysUser putUser(@PathVariable int id, @RequestBody SysUserCreateVo sysUserCreateVo) {
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(sysUserCreateVo.getUsername());
+        sysUser.setPassword(sysUserCreateVo.getPassword());
+        sysUser.setPickname(sysUserCreateVo.getPickname());
+        sysUser.setAge(sysUserCreateVo.getAge());
+        return sysUserService.saveOrUpdate(sysUser);
     }
 
 

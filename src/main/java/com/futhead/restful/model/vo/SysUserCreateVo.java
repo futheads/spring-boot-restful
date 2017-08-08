@@ -5,8 +5,6 @@ package com.futhead.restful.model.vo;
  */
 public class SysUserCreateVo {
 
-    private int id;
-
     private String username;
 
     private String password;
@@ -14,14 +12,6 @@ public class SysUserCreateVo {
     private String pickname;
 
     private int age;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -58,7 +48,6 @@ public class SysUserCreateVo {
     @Override
     public String toString() {
         return "SysUserCreateVo{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", pickname='" + pickname + '\'' +
                 ", age=" + age +

@@ -3,6 +3,7 @@ package com.futhead.restful.service;
 import com.futhead.restful.dao.SysRoleMapper;
 import com.futhead.restful.dao.SysUserRepository;
 import com.futhead.restful.model.po.SysUser;
+import com.futhead.restful.model.vo.SysUserWithRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,10 @@ public class SysUserService {
         sysUserRepository.delete(id);
     }
 
+    public SysUser findSysUserById(int id) {
+        return sysUserRepository.findOne(id);
+    }
+
     public List<SysUser> getSysUsers() {
         return sysUserRepository.findAll();
     }
@@ -35,7 +40,8 @@ public class SysUserService {
     public SysUser findSysUserByUsername(String username) {
         SysUser sysUser = sysUserRepository.findByUsername(username);
         if (sysUser != null) {
-            sysUser.setRoles(sysRoleMapper.findRolesByUserId(sysUser.getId()));
+            SysUserWithRoleVo vo = new SysUserWithRoleVo(sysUser);
+            vo.setRoles(sysRoleMapper.findRolesByUserId(sysUser.getId()));
         }
         return sysUser;
     }
