@@ -29,6 +29,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.2.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.caspar-chen</groupId>
+            <artifactId>swagger-ui-layer</artifactId>
+            <version>0.0.3</version>
+        </dependency>
 	@Api：用在类上，说明该类的作用
 	@ApiOperation：用在方法上，说明方法的作用
 	@ApiImplicitParams：用在方法上包含一组参数说明

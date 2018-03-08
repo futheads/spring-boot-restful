@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by futhead on 2017-7-26.
  */
+@Api("用户控制器")
 @RestController
 @RequestMapping("/users")
 public class UserController {
