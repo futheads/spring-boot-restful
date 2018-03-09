@@ -37,10 +37,18 @@
             <version>2.2.2</version>
         </dependency>
 
-        <dependency>
+        <!-- 黑色皮肤 -->
+        <!--<dependency>
             <groupId>com.github.caspar-chen</groupId>
             <artifactId>swagger-ui-layer</artifactId>
             <version>0.0.3</version>
+        </dependency>-->
+
+        <!-- 白色皮肤 -->
+        <dependency>
+            <groupId>com.drore.cloud</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>1.4</version>
         </dependency>
 
         <dependency>
