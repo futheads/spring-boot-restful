@@ -190,5 +190,15 @@
 		http://www.network-science.de/ascii/
 		http://www.degraeve.com/img2txt.php
 
-## 安全策略：
-	正在学习，持续更新
+## 指定静态资源路径：
+    @Configuration
+    public class WebMvcConf extends WebMvcConfigurerAdapter {
+    
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            //和页面有关的静态目录都放在项目的static目录下
+            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+            //上传的图片在D盘下的OTA目录下，访问路径如：http://localhost:8080/google_img/img.png
+            registry.addResourceHandler("/google_img/**").addResourceLocations("file:D:/google_img/");
+        } 
+    
+    }
